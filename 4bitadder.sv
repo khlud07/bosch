@@ -1,4 +1,12 @@
 // 1-bit Full Adder 
+/*
+Everything is ok
+1)Just a small comment regarding inputs and outputs
+write them with _i and _o. In that way its much more easier to analyze the code:
+Example a_i, b_i, ... cout_o
+
+Module name should be the same as filename. When you work with scripts it could produce errors and unconsistency for build of project.
+*/
 module full_adder (
     input logic a,      // Input bit a
     input logic b,      // Input bit b
@@ -23,6 +31,20 @@ module ripple_carry_adder (
     logic [3:0] carry; // Internal carry signals
 
     // Instantiate the 1-bit full adders
+    //Better to use generate construction for wide bit adders. For 4 bits its still ok 
+        /*
+        genvar i;
+        generate
+          for(i=0; i < BIT_WIDTH; i++)begin : ADDER
+          if(i == 0)
+            full_adder fa(a[i],b[i],cin,sum[i],cout[i]);
+          else if(i == BIT_WIDTH -1 )
+            full_adder fa(a[i],b[i],cout[i-1],sum[i],cout);
+          else
+            full_adder fa(a[i],b[i],cout[i-1],sum[i],cout[i]);
+          end
+        endgenerate
+        */
     full_adder fa0 (
         .a(A[0]), .b(B[0]), .cin(Cin), .sum(Sum[0]), .cout(carry[0])
     );
