@@ -6,11 +6,11 @@ Example a_i, b_i, ... cout_o
 
 Module name should be the same as filename. When you work with scripts it could produce errors and unconsistency for build of project.
 */
-module and_gate (
-    input logic a, b,
-    output logic y
+module AND_gate (
+    input logic a_i, b_i,
+    output logic y_o
 );
     // It will work only for 1bit signal if you need bitwise AND operation; For wide bit correctly use &
-    assign y = a && b; // Using logical AND operator
+    assign y = a & b; // Using logical AND operator
 endmodule
 
