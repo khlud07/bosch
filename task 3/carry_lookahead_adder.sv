@@ -20,7 +20,6 @@ module carry_lookahead_adder (
     
     assign Sum_o = P ^ C; // Sum[i] = P[i] ⊕ C[i]
     
-    assign Cout = G[15] | (P[15] & C[15]);
+    assign Cout = C[15];
     
 endmodule
-
