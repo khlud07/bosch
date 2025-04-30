@@ -42,22 +42,23 @@ module spi_master (
     end
 
     always_ff @(posedge sck_internal or posedge reset_i) begin
-        if (reset_i) begin
-            shift_reg <= 8'b0;
-            recv_reg <= 8'b0;
-            bit_count <= 3'b000;
-        end
-        else if (state == LOAD) begin
+    if (reset_i) begin
+        shift_reg <= 8'b0;
+        recv_reg <= 8'b0;
+        bit_count <= 3'b000;
+    end else begin
+        if (state == LOAD) begin
             shift_reg <= data_in;
             recv_reg <= 8'b0;
             bit_count <= 3'b000;
-        end
-        else if (state == SHIFT) begin
+        end else if (state == SHIFT) begin
             shift_reg <= {shift_reg[6:0], 1'b0}; // Shift left
             recv_reg <= {recv_reg[6:0], MISO};  // Shift in received bit
             bit_count <= bit_count + 1;
         end
     end
+end
+
 
     always_ff @(posedge clk_i or posedge reset_i) begin
         if (reset_i)
