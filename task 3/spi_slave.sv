@@ -65,7 +65,7 @@ module spi_slave (
             miso_sync_1 <= 0;
             miso_sync_2 <= 0;
         end else begin
-            miso_sync_1 <= shift_reg_tx[7]; // Use the LSB of shift register for MISO
+            miso_sync_1 <= shift_reg_tx[0]; // Use the LSB of shift register for MISO
             miso_sync_2 <= miso_sync_1;
         end
     end
