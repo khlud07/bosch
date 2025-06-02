@@ -29,7 +29,7 @@ module spi_slave (
     logic mosi_sync;
 
     // Synchronizing MISO to SCK domain
-    logic miso_sync_1, miso_sync_2;
+    logic miso_sync_1, miso_sync_2, miso_sync_3;
     logic miso_sync;
 
     // SCK synchronization
@@ -64,13 +64,16 @@ module spi_slave (
         if (reset_i) begin
             miso_sync_1 <= 0;
             miso_sync_2 <= 0;
+            miso_sync_3 <= 0;
         end else begin
-            miso_sync_1 <= shift_reg_tx[0]; // Use the LSB of shift register for MISO
+            miso_sync_1 <= shift_reg_tx[7]; 
             miso_sync_2 <= miso_sync_1;
+            miso_sync_3 <= miso_sync_2;
         end
     end
-
-    assign miso_sync = miso_sync_2;  // Final synchronized MISO signal
+	
+    
+  assign miso_sync = (miso_sync_3 == 1'b1 && miso_sync == 1'b0);  // Final synchronized MISO signal
 
     // State machine for SPI Slave
     always_ff @(posedge clk_i or posedge reset_i) begin
