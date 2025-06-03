@@ -73,7 +73,7 @@ module spi_slave (
     end
 	
     
-  assign miso_sync = (miso_sync_3 == 1'b1 && miso_sync == 1'b0);  // Final synchronized MISO signal
+  assign miso_sync = miso_sync_3;  // Final synchronized MISO signal
 
     // State machine for SPI Slave
     always_ff @(posedge clk_i or posedge reset_i) begin
