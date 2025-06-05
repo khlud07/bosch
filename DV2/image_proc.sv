@@ -23,18 +23,19 @@ module image_proc #(
 
 
 	//unpacking
-	function pix_arr unpacking (input logic [DATA_BW*9-1:0] i_dxi_in_data);		
+	always_comb begin		
 		pix_arr pixel;
-	    for (int i = 0; i < 9; i++) begin										// structuring input
-	        pixel[i] = i_dxi_in_data[(DATA_BW*9-1 - i*DATA_BW) : ((DATA_BW*9-1 - i*DATA_BW) - i*DATA_BW)];  	// pixel[i] is the i-st DATA_BW bits of input flow
+	    for (int i = 0; i < 9; i++) begin									// structuring input
+	        pixel[i] = i_dxi_in_data[(DATA_BW*9-1 - i*DATA_BW) : ((DATA_BW*9-1 - i*DATA_BW) - i*DATA_BW)];  // pixel[i] is the i-st DATA_BW bits of input flow
 	    end
 	    return pixel;
-	endfunction 
+	end
 
 
 	// applying mask and normalise
-	function logic [DATA_BW-1:0] apply_mask (input logic pix_arr pixel [DATA_BW-1:0], input [1:0] i_config_select);
+	always_comb begin
 		int [1:0] norm = 1;
+		int pix_applied = 0;
 		mask_arr mask;
 		int result;
 
@@ -45,4 +46,5 @@ module image_proc #(
 			2b'11: mask = avrg; norm = 9;
 		endcase
 
-		
+
+	end	
