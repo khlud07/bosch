@@ -18,15 +18,15 @@ module image_proc #(
 
 	mask_arr laplacian_1 '{0, -1, 0, -1, 4, -1, 0, -1, 0};     
 	mask_arr laplacian_2 '{-1, -1, -1, -1, 8, -1, -1, -1, -1}; 
-	mask_arr gauss '{1, 2, 1, 2, 4, 2, 1, 2, 1}';
-	mask_arr avrg '{1 1 1 1 1 1 1 1 1}';
+	mask_arr gauss '{1, 2, 1, 2, 4, 2, 1, 2, 1};
+	mask_arr avrg '{1 1 1 1 1 1 1 1 1};
 
 
 	//unpacking
 	function pix_arr unpacking (input logic [DATA_BW*9-1:0] i_dxi_in_data);		
 		pix_arr pixel;
-	    for (int i = 0; i < 9; i++) begin																	// structuring input
-	        pixel[i] = i_dxi_in_data[(DATA_BW*9-1 - i*DATA_BW) : ((DATA_BW*9-1 - i*DATA_BW) - i*DATA_BW)];  // pixel[i] is the i-st DATA_BW bits of input flow
+	    for (int i = 0; i < 9; i++) begin										// structuring input
+	        pixel[i] = i_dxi_in_data[(DATA_BW*9-1 - i*DATA_BW) : ((DATA_BW*9-1 - i*DATA_BW) - i*DATA_BW)];  	// pixel[i] is the i-st DATA_BW bits of input flow
 	    end
 	    return pixel;
 	endfunction 
